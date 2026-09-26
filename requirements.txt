@@ -1,0 +1,13 @@
+# 开发机（x86 Linux / Windows）侧依赖
+numpy>=1.24
+onnx>=1.15
+onnxruntime>=1.17
+onnxsim>=0.4.36
+opencv-python>=4.9
+pyyaml>=6.0
+ultralytics>=8.2
+torch>=2.2
+
+# 说明：
+# 1) P1 板端的 NOE Runtime、cix-npu-driver、cix-noe-umd 由厂商 deb 包提供，不在本文件中。
+# 2) VLM 侧使用 llama.cpp（Vulkan 后端）与本仓库外部的 GGUF 量化权重。

@@ -1,0 +1,29 @@
+# 深度高度图注入 Nav2 costmap 的参数骨架
+# 目标：把单目深度估计得到的低矮障碍物写进代价地图，补齐 2D LiDAR 的盲区。
+
+depth_to_costmap:
+  enabled: true
+  # 深度图转 2.5D 高度图
+  depth_topic: /camera/depth/image_raw
+  camera_info_topic: /camera/camera_info
+  min_height_m: 0.02          # 低于此高度的像素不视为障碍（过滤地面噪声）
+  max_height_m: 0.60          # 高于此高度按墙面/家具处理
+  obstacle_threshold_m: 0.05  # 高度超过地面此数值即标记为障碍
+
+  # 伪点云注入 costmap
+  pointcloud_topic: /vision/obstacle_cloud
+  costmap_layer: vision_layer
+  observation_persistence_s: 2.0
+  raytrace_max_range_m: 1.5
+  raytrace_min_range_m: 0.1
+
+  # 语义决策触发
+  vlm_trigger:
+    min_confidence: 0.6       # 检测置信度阈值
+    classes: ["power_cord", "sock", "slipper", "pet_waste", "toy"]
+    cooldown_s: 5.0           # 同一障碍物的决策冷却时间
+
+  # 安全兜底：AI 层异常时退回纯 LiDAR
+  fallback:
+    on_inference_error: lidar_only
+    watchdog_timeout_s: 1.0

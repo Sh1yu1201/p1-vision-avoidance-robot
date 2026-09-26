@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# 模型与数据（体积大、含许可限制，请通过文档中的指引下载）
+models/
+*.pt
+*.onnx
+*.cix
+*.gguf
+datasets/
+calibration/
+
+# 运行产物
+outputs/
+logs/
+*.mp4
+*.avi
+*.log
+
+# ROS 2 工作空间
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
